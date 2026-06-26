@@ -3,7 +3,6 @@
 # Table of Contents
 1. [Introduction](#introduction)  
    1.1. [Download ROS package](#download-ros-package)  
-   1.2. [Test the starter package](#test-the-starter-package)  
 2. [Mapping](#mapping)  
    2.1. [SLAM Toolbox](#slam-toolbox)  
 3. [Localization](#localization)  
@@ -25,93 +24,6 @@ To download the starter package, clone the following git repo with the `starter-
 ```bash
 git clone -b starter-branch https://github.com/MOGI-ROS/Week-7-8-ROS2-Navigation
 ```
-
-Let's take a look at what's inside the `bme_ros2_navigation` package with the `tree` command:
-
-```bash
-.
-├── CMakeLists.txt
-├── package.xml
-├── config
-│   ├── amcl_localization.yaml
-│   ├── ekf.yaml
-│   ├── gz_bridge.yaml
-│   ├── navigation.yaml
-│   ├── slam_toolbox_localization.yaml
-│   ├── slam_toolbox_mapping.yaml
-│   └── waypoints.yaml
-├── launch
-│   ├── check_urdf.launch.py
-│   ├── spawn_robot.launch.py
-│   └── world.launch.py
-├── maps
-│   ├── my_map.pgm
-│   ├── my_map.yaml
-│   ├── serialized.data
-│   └── serialized.posegraph
-├── meshes
-│   ├── lidar.dae
-│   ├── mogi_bot.dae
-│   └── wheel.dae
-├── rviz
-│   ├── localization.rviz
-│   ├── mapping.rviz
-│   ├── navigation.rviz
-│   ├── rviz.rviz
-│   └── urdf.rviz
-├── urdf
-│   ├── materials.xacro
-│   ├── mogi_bot.gazebo
-│   └── mogi_bot.urdf
-└── worlds
-    ├── empty.sdf
-    └── home.sdf
-```
-
-Here's what each folder is used for:
-
-- `config`: Stores parameters and large configuration files that are impractical to manage directly in launch files.
-- `launch`: Default launch files for testing the package with `spawn_robot.launch.py`.
-- `maps`: Offline map files for the Gazebo world.
-- `meshes`: 3D models in `dae` (collada mesh) format for the robot body, wheels, and lidar sensor.
-- `rviz`: Pre-configured RViz2 layouts.
-- `urdf`: URDF models of the robot.
-- `worlds`: Default Gazebo worlds used in simulations.
-
-We also have a second package `bme_ros2_navigation_py` for Python scripts:
-
-```bash
-.
-├── bme_ros2_navigation_py
-│   ├── __init__.py
-│   ├── send_initialpose.py
-│   └── slam_toolbox_load_map.py
-├── package.xml
-├── resource
-│   └── bme_ros2_navigation_py
-├── setup.cfg
-└── setup.py
-```
-
-## Test the starter package
-
-After downloading the `starter-branch`, rebuild the workspace and source `install/setup.bash`. Before testing, note a few important changes in `spawn_robot.launch.py`:
-
-- This package uses EKF sensor fusion by default; `tf` transformations from Gazebo are not forwarded directly — this is handled by `robot_localization`.
-- All `parameter_bridge` topics are now declared in `gz_bridge.yaml` rather than in the launch file.
-- A new `marker_server` node from `interactive-marker-twist-server` allows moving/rotating the robot directly from RViz. Install it with:
-
-```bash
-sudo apt install ros-jazzy-interactive-marker-twist-server
-```
-
-Now test the package:
-
-```bash
-ros2 launch bme_ros2_navigation spawn_robot.launch.py
-```
-
----
 
 # Mapping
 

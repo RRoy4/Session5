@@ -25,6 +25,10 @@ To download the starter package, clone the following git repo with the `starter-
 git clone -b session5-slam https://github.com/RRoy4/Session5
 ```
 
+# Note
+
+Make sure your cloned folder has the mogi_trajectory_server folder inside of it otherwise the files will not launch.
+
 # Mapping
 
 SLAM (Simultaneous Localization and Mapping) allows a robot to:
